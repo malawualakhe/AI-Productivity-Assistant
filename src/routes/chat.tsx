@@ -51,7 +51,7 @@ function ChatPage() {
 
   const { messages, sendMessage, status } = useChat({
     id: CHAT_ID,
-    initialMessages,
+    messages: initialMessages,
     transport,
   });
 
