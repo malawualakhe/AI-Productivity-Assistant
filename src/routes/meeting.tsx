@@ -119,15 +119,8 @@ function MeetingPage() {
       {result && (
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <h2 className="font-display text-sm font-semibold text-foreground">
-              Summary
-            </h2>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleCopy}
-              className="h-8 gap-1"
-            >
+            <h2 className="font-display text-sm font-semibold text-foreground">Summary</h2>
+            <Button variant="ghost" size="sm" onClick={handleCopy} className="h-8 gap-1">
               {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
               {copied ? "Copied" : "Copy"}
             </Button>
@@ -136,10 +129,7 @@ function MeetingPage() {
             value={result}
             onChange={(e) => setResult(e.target.value)}
             rows={12}
-            className={cn(
-              "resize-y text-sm leading-relaxed",
-              "focus-visible:ring-primary"
-            )}
+            className={cn("resize-y text-sm leading-relaxed", "focus-visible:ring-primary")}
           />
         </div>
       )}

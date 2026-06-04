@@ -82,7 +82,7 @@ function ChatPage() {
       sendMessage({ text });
       setInput("");
     },
-    [input, isLoading, sendMessage]
+    [input, isLoading, sendMessage],
   );
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -97,9 +97,7 @@ function ChatPage() {
       <div className="mb-4 space-y-1">
         <div className="flex items-center gap-2">
           <MessageSquare className="h-5 w-5 text-primary" />
-          <h1 className="font-display text-2xl font-bold text-foreground">
-            AI Chatbot
-          </h1>
+          <h1 className="font-display text-2xl font-bold text-foreground">AI Chatbot</h1>
         </div>
         <p className="text-muted-foreground">
           Ask anything about your workplace tasks, planning, or productivity.
@@ -169,9 +167,7 @@ function ChatMessage({ message }: { message: UIMessage }) {
   const isUser = message.role === "user";
   const [copied, setCopied] = useState(false);
 
-  const text = message.parts
-    .map((part) => (part.type === "text" ? part.text : ""))
-    .join("");
+  const text = message.parts.map((part) => (part.type === "text" ? part.text : "")).join("");
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(text);
@@ -184,7 +180,7 @@ function ChatMessage({ message }: { message: UIMessage }) {
       <div
         className={cn(
           "flex h-8 w-8 shrink-0 items-center justify-center rounded-full",
-          isUser ? "bg-primary" : "bg-primary/10"
+          isUser ? "bg-primary" : "bg-primary/10",
         )}
       >
         {isUser ? (
@@ -193,18 +189,11 @@ function ChatMessage({ message }: { message: UIMessage }) {
           <Bot className="h-4 w-4 text-primary" />
         )}
       </div>
-      <div
-        className={cn(
-          "max-w-[80%] space-y-1",
-          isUser ? "items-end" : "items-start"
-        )}
-      >
+      <div className={cn("max-w-[80%] space-y-1", isUser ? "items-end" : "items-start")}>
         <div
           className={cn(
             "rounded-2xl px-4 py-2.5 text-sm leading-relaxed",
-            isUser
-              ? "bg-primary text-primary-foreground"
-              : "text-foreground"
+            isUser ? "bg-primary text-primary-foreground" : "text-foreground",
           )}
         >
           {isUser ? (

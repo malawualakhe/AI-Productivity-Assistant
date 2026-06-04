@@ -43,7 +43,12 @@ function EmailPage() {
     setIsLoading(true);
     try {
       const data = await generateEmailFn({
-        data: { purpose, recipient, tone: tone as "professional" | "friendly" | "formal" | "casual", keyPoints },
+        data: {
+          purpose,
+          recipient,
+          tone: tone as "professional" | "friendly" | "formal" | "casual",
+          keyPoints,
+        },
       });
       setResult(data.result);
     } catch (err) {
@@ -60,17 +65,14 @@ function EmailPage() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const canGenerate =
-    purpose.trim() && recipient.trim() && keyPoints.trim();
+  const canGenerate = purpose.trim() && recipient.trim() && keyPoints.trim();
 
   return (
     <div className="mx-auto max-w-3xl space-y-6">
       <div className="space-y-1">
         <div className="flex items-center gap-2">
           <Mail className="h-5 w-5 text-primary" />
-          <h1 className="font-display text-2xl font-bold text-foreground">
-            Smart Email Generator
-          </h1>
+          <h1 className="font-display text-2xl font-bold text-foreground">Smart Email Generator</h1>
         </div>
         <p className="text-muted-foreground">
           Describe your email needs and let AI craft the perfect message.
@@ -147,20 +149,9 @@ function EmailPage() {
       {result && (
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <h2 className="font-display text-sm font-semibold text-foreground">
-              Generated Email
-            </h2>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleCopy}
-              className="h-8 gap-1"
-            >
-              {copied ? (
-                <Check className="h-4 w-4" />
-              ) : (
-                <Copy className="h-4 w-4" />
-              )}
+            <h2 className="font-display text-sm font-semibold text-foreground">Generated Email</h2>
+            <Button variant="ghost" size="sm" onClick={handleCopy} className="h-8 gap-1">
+              {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
               {copied ? "Copied" : "Copy"}
             </Button>
           </div>
@@ -170,7 +161,7 @@ function EmailPage() {
             rows={12}
             className={cn(
               "resize-y font-mono text-sm leading-relaxed",
-              "focus-visible:ring-primary"
+              "focus-visible:ring-primary",
             )}
           />
         </div>

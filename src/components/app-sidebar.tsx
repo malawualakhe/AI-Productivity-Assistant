@@ -59,10 +59,7 @@ export function AppSidebar() {
                     isActive={isActive(item.url)}
                     tooltip={collapsed ? item.title : undefined}
                   >
-                    <Link
-                      to={item.url}
-                      className="flex items-center gap-2"
-                    >
+                    <Link to={item.url} className="flex items-center gap-2">
                       <item.icon className="h-4 w-4" />
                       <span>{item.title}</span>
                     </Link>

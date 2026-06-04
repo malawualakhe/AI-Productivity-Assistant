@@ -76,7 +76,9 @@ function DashboardPage() {
             to={tool.href}
             className="group flex flex-col rounded-xl border bg-card p-6 transition-all hover:border-primary/30 hover:shadow-sm"
           >
-            <div className={`mb-4 flex h-10 w-10 items-center justify-center rounded-lg ${tool.color}`}>
+            <div
+              className={`mb-4 flex h-10 w-10 items-center justify-center rounded-lg ${tool.color}`}
+            >
               <tool.icon className="h-5 w-5" />
             </div>
             <h3 className="font-display text-base font-semibold text-foreground group-hover:text-primary">
@@ -97,12 +99,10 @@ function DashboardPage() {
             <Sparkles className="h-5 w-5 text-primary" />
           </div>
           <div>
-            <h3 className="font-display text-base font-semibold text-foreground">
-              Pro Tip
-            </h3>
+            <h3 className="font-display text-base font-semibold text-foreground">Pro Tip</h3>
             <p className="mt-1 text-sm text-muted-foreground">
-              Start with the AI Chatbot for quick questions, or dive into a specific
-              tool like the Email Generator or Task Planner to see AI in action.
+              Start with the AI Chatbot for quick questions, or dive into a specific tool like the
+              Email Generator or Task Planner to see AI in action.
             </p>
           </div>
         </div>

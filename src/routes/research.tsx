@@ -63,9 +63,7 @@ function ResearchPage() {
       <div className="space-y-1">
         <div className="flex items-center gap-2">
           <Search className="h-5 w-5 text-primary" />
-          <h1 className="font-display text-2xl font-bold text-foreground">
-            AI Research Assistant
-          </h1>
+          <h1 className="font-display text-2xl font-bold text-foreground">AI Research Assistant</h1>
         </div>
         <p className="text-muted-foreground">
           Enter any topic and get structured research summaries.
@@ -123,24 +121,14 @@ function ResearchPage() {
       {result && (
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <h2 className="font-display text-sm font-semibold text-foreground">
-              Research Summary
-            </h2>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleCopy}
-              className="h-8 gap-1"
-            >
+            <h2 className="font-display text-sm font-semibold text-foreground">Research Summary</h2>
+            <Button variant="ghost" size="sm" onClick={handleCopy} className="h-8 gap-1">
               {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
               {copied ? "Copied" : "Copy"}
             </Button>
           </div>
           <div
-            className={cn(
-              "rounded-xl border bg-card p-6 text-sm leading-relaxed",
-            "markdown-body"
-            )}
+            className={cn("rounded-xl border bg-card p-6 text-sm leading-relaxed", "markdown-body")}
           >
             <ReactMarkdown>{result}</ReactMarkdown>
           </div>

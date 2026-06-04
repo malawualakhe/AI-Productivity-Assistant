@@ -23,8 +23,7 @@ export const generateEmail = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const { text } = await generateText({
       model: getModel(),
-      system:
-        "You are an expert workplace communication assistant. Write clear, effective emails.",
+      system: "You are an expert workplace communication assistant. Write clear, effective emails.",
       prompt: `Write a ${data.tone} email to ${data.recipient} about: ${data.purpose}. Key points to include: ${data.keyPoints}. Include a subject line at the top prefixed with "Subject: ".`,
     });
     return { result: text };
@@ -65,12 +64,8 @@ const PlanTasksInput = z.object({
 export const planTasks = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => PlanTasksInput.parse(input))
   .handler(async ({ data }) => {
-    const deadlineContext = data.deadline
-      ? `The deadline is ${data.deadline}.`
-      : "";
-    const contextInfo = data.context
-      ? `Additional context: ${data.context}`
-      : "";
+    const deadlineContext = data.deadline ? `The deadline is ${data.deadline}.` : "";
+    const contextInfo = data.context ? `Additional context: ${data.context}` : "";
 
     const { text } = await generateText({
       model: getModel(),
