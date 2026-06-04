@@ -210,7 +210,7 @@ function ChatMessage({ message }: { message: UIMessage }) {
           {isUser ? (
             <p>{text}</p>
           ) : (
-            <div className="prose prose-sm max-w-none">
+            <div className="markdown-body">
               <ReactMarkdown>{text}</ReactMarkdown>
             </div>
           )}
