@@ -139,7 +139,7 @@ function ResearchPage() {
           <div
             className={cn(
               "rounded-xl border bg-card p-6 text-sm leading-relaxed",
-              "prose prose-sm max-w-none"
+            "markdown-body"
             )}
           >
             <ReactMarkdown>{result}</ReactMarkdown>
