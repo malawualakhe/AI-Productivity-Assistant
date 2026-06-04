@@ -11,6 +11,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { SidebarProvider, SidebarTrigger, SidebarInset } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
 
 function NotFoundComponent() {
   return (
@@ -77,14 +79,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "AI Workplace Productivity Assistant" },
+      {
+        name: "description",
+        content:
+          "Automate workplace tasks with AI-powered tools for email, meetings, task planning, research, and chat.",
+      },
+      { name: "author", content: "AI Workplace" },
+      { property: "og:title", content: "AI Workplace Productivity Assistant" },
+      { property: "og:description", content: "Automate workplace tasks with AI-powered tools." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:site", content: "@AIWorkplace" },
     ],
     links: [
       {
@@ -118,8 +124,22 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <SidebarProvider>
+        <div className="flex min-h-svh w-full">
+          <AppSidebar />
+          <SidebarInset>
+            <header className="sticky top-0 z-10 flex h-14 items-center gap-2 border-b bg-background px-4">
+              <SidebarTrigger />
+              <span className="text-sm font-medium text-muted-foreground">
+                AI Workplace Productivity Assistant
+              </span>
+            </header>
+            <main className="flex-1 p-6">
+              <Outlet />
+            </main>
+          </SidebarInset>
+        </div>
+      </SidebarProvider>
     </QueryClientProvider>
   );
 }
