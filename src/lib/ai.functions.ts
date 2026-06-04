@@ -3,10 +3,12 @@ import { generateText } from "ai";
 import { z } from "zod";
 import { createLovableAiGatewayProvider } from "./ai-gateway.server";
 
-const key = process.env.LOVABLE_API_KEY;
-if (!key) throw new Error("Missing LOVABLE_API_KEY");
-const gateway = createLovableAiGatewayProvider(key);
-const model = gateway("google/gemini-3-flash-preview");
+function getModel() {
+  const key = process.env.LOVABLE_API_KEY;
+  if (!key) throw new Error("Missing LOVABLE_API_KEY");
+  const gateway = createLovableAiGatewayProvider(key);
+  return gateway("google/gemini-3-flash-preview");
+}
 
 // Smart Email Generator
 const GenerateEmailInput = z.object({
@@ -20,7 +22,7 @@ export const generateEmail = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => GenerateEmailInput.parse(input))
   .handler(async ({ data }) => {
     const { text } = await generateText({
-      model,
+      model: getModel(),
       system:
         "You are an expert workplace communication assistant. Write clear, effective emails.",
       prompt: `Write a ${data.tone} email to ${data.recipient} about: ${data.purpose}. Key points to include: ${data.keyPoints}. Include a subject line at the top prefixed with "Subject: ".`,
@@ -45,7 +47,7 @@ export const summarizeMeeting = createServerFn({ method: "POST" })
           : "Summarize as a concise paragraph covering the main points, decisions, and outcomes.";
 
     const { text } = await generateText({
-      model,
+      model: getModel(),
       system:
         "You are a meeting productivity assistant. Summarize meeting notes accurately and concisely.",
       prompt: `Meeting notes:\n\n${data.notes}\n\n${formatInstruction}`,
@@ -71,7 +73,7 @@ export const planTasks = createServerFn({ method: "POST" })
       : "";
 
     const { text } = await generateText({
-      model,
+      model: getModel(),
       system:
         "You are a project management assistant. Break down goals into actionable, prioritized tasks with realistic time estimates.",
       prompt: `Goal: ${data.goal}\n${contextInfo}\n${deadlineContext}\n\nBreak this down into a prioritized list of actionable tasks. For each task, include:\n- Task name\n- Estimated time\n- Priority (High/Medium/Low)\n- Any dependencies\n\nFormat as a clean markdown list.`,
@@ -96,7 +98,7 @@ export const researchTopic = createServerFn({ method: "POST" })
           : "Provide a comprehensive research summary with overview, key findings, implications, and sources of information.";
 
     const { text } = await generateText({
-      model,
+      model: getModel(),
       system:
         "You are a research assistant. Provide accurate, well-structured information on any topic. Always note when information may be limited or speculative.",
       prompt: `Research topic: ${data.topic}\n\n${depthInstruction}\n\nImportant: If you are uncertain about any facts, clearly state that the information may be incomplete.`,
